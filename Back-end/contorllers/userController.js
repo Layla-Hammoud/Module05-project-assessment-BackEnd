@@ -83,3 +83,26 @@ export async function addNewUser(req, res) {
     return res.status(400).json(error);
   }
 }
+
+export const getOneUser = async (request, response) => {
+    const { id } = request.user
+    try {
+      // Fetching all users from the database
+      const user = await User.findOne({ _id: id  });
+  
+      if (!user) {
+        return response.status(401).json({ message: "user not found" });
+      }
+  
+      return response.status(200).json({
+        data: user,
+        success: true,
+        message: "User found"
+      });
+    } catch (error) {
+      return response.status(401).json({
+        success: false,
+        message: error.message
+      });
+    }
+  };
