@@ -2,7 +2,7 @@ import Product from "../models/productModel.js";
 // add
 const AddProduct = async (req, res) => {
   const { name, description, price } = req.body;
-  if (!req.file || name || description || price) {
+  if (!req.file || !name || !description || !price) {
     return res.status(400).json({ message: "All fields are required" });
   }
   const image = req.file.filename;

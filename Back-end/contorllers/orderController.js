@@ -2,7 +2,7 @@ import Order from "../models/orderModel.js";
 
 export const addOrder = async (req, res) => {
   try {
-    const user = req.user._id;
+    const user = req.user.id;
     const { products, totalPrice } = req.body;
     const order = await Order.create({
       user,

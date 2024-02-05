@@ -6,19 +6,21 @@ import {
   getProducts,
   editProduct,
 } from "../contorllers/productController.js";
-import { isAdmin } from "../middleware/authMiddleware.js";
+import { isAdmin,authenticate } from "../middleware/authMiddleware.js";
 export const productRoutes = Router();
 
 productRoutes.post(
   "/addProduct",
+  authenticate,
   isAdmin,
   uploadImage.single("image"),
   AddProduct
 );
-productRoutes.delete("/deleteProduct", isAdmin, deleteProduct);
+productRoutes.delete("/deleteProduct", authenticate,isAdmin, deleteProduct);
 productRoutes.get("/AllProducts", getProducts);
 productRoutes.patch(
   "/editProduct",
+  authenticate,
   isAdmin,
   uploadImage.single("image"),
   editProduct
